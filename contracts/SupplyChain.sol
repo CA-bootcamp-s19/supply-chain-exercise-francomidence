@@ -33,6 +33,7 @@ contract SupplyChain {
     if you need help you can ask around :)
     Be sure to add "payable" to addresses that will be handling value transfer
   */
+
     struct Item {
         string name;
         uint256 sku;
@@ -45,6 +46,7 @@ contract SupplyChain {
     /* Create 4 events with the same name as each possible State (see above)
     Prefix each event with "Log" for clarity, so the forSale event will be called "LogForSale"
     Each event should accept one argument, the sku */
+
     event LogForSale(uint256 sku);
     event LogSold(uint256 sku);
     event LogShipped(uint256 sku);
@@ -62,10 +64,6 @@ contract SupplyChain {
         _;
     }
 
-    modifier paidEnough(uint256 _price) {
-        require(msg.value >= _price);
-        _;
-    }
     modifier checkValue(uint256 _sku) {
         //refund them after pay for item (why it is before, _ checks for logic before func)
         _;
@@ -112,6 +110,8 @@ contract SupplyChain {
     }
 
     constructor() public {
+        /* Here, set the owner as the person who instantiated the contract
+       and set your skuCount to 0. */
         owner = msg.sender;
         skuCount = 0;
     }
